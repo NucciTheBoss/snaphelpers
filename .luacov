@@ -1,0 +1,19 @@
+return {
+  configfile = '.luacov',
+  statsfile = 'luacov.stats.out',
+  reportfile = 'luacov.report.out',
+  runreport = true,
+  deletestats = true,
+  modules = {
+    ["snap"] = "src/snap/init.lua",
+    ["snap.*"] = "src"
+  },
+  exclude = {
+    'luacov$',
+    'luacov.reporter$',
+    'luacov.defaults$',
+    'luacov.runner$',
+    'luacov.stats$',
+    'luacov.tick$',
+  },
+}
