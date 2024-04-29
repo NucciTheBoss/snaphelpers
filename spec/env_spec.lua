@@ -46,13 +46,6 @@ describe("`snap.env`: test env(ironment) module", function()
     _G.snap = require("snap")
   end)
 
-  teardown(function()
-    -- Unset mock `SNAP_*` environment variables.
-    for k, _ in pairs(mock_env_vars) do
-      posix.setenv(k)
-    end
-  end)
-
   test("`snap.env`: test env var accessors", function()
     local snap = _G.snap
     assert.are.equal(snap.env.COMMON, "/var/snap/ondemand/common")

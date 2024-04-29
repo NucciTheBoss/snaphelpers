@@ -34,13 +34,6 @@ describe("`snap.paths`: test paths module", function()
     _G.snap = require("snap")
   end)
 
-  teardown(function()
-    -- Unset mock `SNAP_*` environment variables.
-    for k, _ in pairs(mock_env_vars) do
-      posix.setenv(k)
-    end
-  end)
-
   test("`snap.paths`: test env var accessors", function()
     local snap = _G.snap
     assert.are.equal(snap.paths.snap, "/snap/ondemand/x1")
