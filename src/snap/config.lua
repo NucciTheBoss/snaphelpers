@@ -58,7 +58,7 @@ function SnapConfig:get_options(...)
   local config = {}
   for _, k in ipairs(arg) do
     local c = self.get(k)
-    local target = string.match(k, "[^.]+$")  -- If sub-key, get deepest nested key.
+    local target = string.match(k, "[^.]+$") -- If sub-key, get deepest nested key.
     config[target] = c
   end
   return config

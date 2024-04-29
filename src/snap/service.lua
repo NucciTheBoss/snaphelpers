@@ -56,7 +56,7 @@ end
 
 --- Refresh the current status of the snap service.
 function SnapService:refresh_status()
-  local s_info = ctl:services(self.name)[1]  -- Only one index is returned.
+  local s_info = ctl:services(self.name)[1] -- Only one index is returned.
   self.name = s_info.name
   self.enabled = s_info.enabled
   self.active = s_info.active

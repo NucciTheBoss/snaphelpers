@@ -68,21 +68,21 @@ end
 ---@param service string | nil Service to start. If no is service is provided, start all services.
 ---@param enable boolean | nil Wether to enable the service(s) at startup.
 function SnapCtl:start(service, enable)
-  self:run_services("start", service, {enable = enable})
+  self:run_services("start", service, { enable = enable })
 end
 
 --- Stop all or specified service within the snap.
 ---@param service string | nil Service to stop. If no service is provided, stop all services.
 ---@param disable boolean | nil Whether to disable the service(s) at startup.
 function SnapCtl:stop(service, disable)
-  self:run_services("stop", service, {disable = disable})
+  self:run_services("stop", service, { disable = disable })
 end
 
 --- Restart all or specified service within the snap.
 ---@param service string | nil Service to restart. If no service is provided, restart all services.
 ---@param reload boolean | nil Whether to reload the service(s) if supported.
 function SnapCtl:restart(service, reload)
-  self:run_services("restart", service, {reload = reload})
+  self:run_services("restart", service, { reload = reload })
 end
 
 ---Retrieve information about a service inside the snap.
@@ -99,7 +99,7 @@ function SnapCtl:services(name)
     local info = {}
     for d in string.gmatch(s, "[^%s]+") do
       table.insert(info, d)
-    end  -- Iterate over line with whitespace separator `[^%s]`.
+    end -- Iterate over line with whitespace separator `[^%s]`.
 
     local notes = {}
     if info[4] ~= "-" then
@@ -114,7 +114,7 @@ function SnapCtl:services(name)
       notes = notes
     }
     table.insert(s_infos, s_info)
-  end  -- Iterate over multiline string with newline separator `[^\r\n]+`.
+  end -- Iterate over multiline string with newline separator `[^\r\n]+`.
 
   return s_infos
 end
@@ -123,7 +123,7 @@ end
 ---@param ... string Keys to get from snap configuration.
 ---@return table<string, any>
 function SnapCtl:config_get(...)
-  local cmd = {"get", "-d"}
+  local cmd = { "get", "-d" }
   for _, key in ipairs(arg) do
     table.insert(cmd, key)
   end
@@ -135,7 +135,7 @@ end
 --- Set snap configuration.
 ---@param config table<string, any> Keys to set in snap configuration. Keys can use dot notation.
 function SnapCtl:config_set(config)
-  local cmd = {"set"}
+  local cmd = { "set" }
   for _, key in ipairs(set_args(config)) do
     table.insert(cmd, key)
   end
@@ -145,7 +145,7 @@ end
 --- Unset snap configuration.
 ---@param ... string Keys to unset in snap configuration.
 function SnapCtl:config_unset(...)
-  local cmd = {"unset"}
+  local cmd = { "unset" }
   for _, key in ipairs(unset_args(...)) do
     table.insert(cmd, key)
   end
@@ -156,7 +156,7 @@ end
 ---@param status string Snap health status.
 ---@param msg string | nil Message for snap health status.
 function SnapCtl:set_health(status, msg)
-  local cmd = {"set-health", status}
+  local cmd = { "set-health", status }
   if msg then table.insert(cmd, msg) end
   self.run(cmd)
 end
@@ -168,7 +168,7 @@ end
 ---@return string
 ---@private
 function SnapCtl:run_services(action, service, option)
-  local cmd = {action}
+  local cmd = { action }
 
   if option then
     for k, v in pairs(option) do
