@@ -58,12 +58,8 @@ function SnapConfig:get_options(...)
   local config = {}
   for _, k in ipairs(arg) do
     local c = self.get(k)
-    if string.find(k, ".") then  -- If provided key is not a top-level snap configuration key.
-      local sub_key = string.match(k, "[^.]+$")  -- Get nested most key.
-      config[sub_key] = c
-    else  -- Provided key is a top-level snap configuration key.
-      config[k] = c
-    end
+    local target = string.match(k, "[^.]+$")  -- If sub-key, get deepest nested key.
+    config[target] = c
   end
   return config
 end
