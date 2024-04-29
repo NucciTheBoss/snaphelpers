@@ -152,15 +152,6 @@ function SnapCtl:config_unset(...)
   self.run(table.concat(cmd, " "))
 end
 
--- TODO: Remove this. It is unnecessary
----@type table<string, string> Allowable values for snap health status.
-local health_status = {
-  okay = "okay",
-  waiting = "waiting",
-  blocked = "blocked",
-  error = "error"
-}
-
 --- Set snap health status.
 ---@param status string Snap health status.
 ---@param msg string | nil Message for snap health status.
