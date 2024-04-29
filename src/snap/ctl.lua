@@ -128,7 +128,7 @@ function SnapCtl:config_get(...)
     table.insert(cmd, key)
   end
 
-  local out = self.run(table.concat(cmd, " "))
+  local out = self.run(cmd)
   return json.decode(out)
 end
 
@@ -139,7 +139,7 @@ function SnapCtl:config_set(config)
   for _, key in ipairs(set_args(config)) do
     table.insert(cmd, key)
   end
-  self.run(table.concat(cmd, " "))
+  self.run(cmd)
 end
 
 --- Unset snap configuration.
@@ -149,7 +149,7 @@ function SnapCtl:config_unset(...)
   for _, key in ipairs(unset_args(...)) do
     table.insert(cmd, key)
   end
-  self.run(table.concat(cmd, " "))
+  self.run(cmd)
 end
 
 --- Set snap health status.
@@ -158,7 +158,7 @@ end
 function SnapCtl:set_health(status, msg)
   local cmd = {"set-health", status}
   if msg then table.insert(cmd, msg) end
-  self.run(table.concat(cmd, " "))
+  self.run(cmd)
 end
 
 --- Run a `snapctl` command on a given service.
@@ -182,15 +182,15 @@ function SnapCtl:run_services(action, service, option)
     table.insert(cmd, env.INSTANCE_NAME)
   end
 
-  return self.run(table.concat(cmd, " "))
+  return self.run(cmd)
 end
 
 --- Run a `snapctl` command and return its output.
----@param cmd string `snapctl` command to run.
+---@param args string[] Arguments to pass to `snapctl`.
 ---@return string
 ---@private
-function SnapCtl.run(cmd)
-  cmd = "/usr/bin/snapctl " .. cmd
+function SnapCtl.run(args)
+  local cmd = "/usr/bin/snapctl " .. table.concat(args, " ")
   return os.capture(cmd, false)
 end
 
