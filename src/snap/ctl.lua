@@ -36,7 +36,7 @@ end
 local function set_args(config)
   local set = {}
   for k, v in pairs(config) do
-    table.insert(set, string.format("%s=%s", k, json.encode(v)))
+    table.insert(set, string.format("%s='%s'", k, json.encode(v)))
   end
   return set
 end
