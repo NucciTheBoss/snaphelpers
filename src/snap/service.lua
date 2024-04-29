@@ -16,20 +16,21 @@ local ctl = require("snap.ctl")
 
 ---@class SnapService
 local SnapService = {}
+SnapService.__index = SnapService
 
 --- Create a new `SnapService` object.
 ---@param t table<string, any> Current info about the snap service.
 ---@return SnapService
 function SnapService:new(t)
-  local snapservice = setmetatable({}, self)
-  self.__index = self
+  local service = {}
+  setmetatable(service, SnapService)
 
-  self.name = t.name
-  self.enabled = t.enabled
-  self.active = t.active
-  self.notes = t.notes
+  service.name = t.name
+  service.enabled = t.enabled
+  service.active = t.active
+  service.notes = t.notes
 
-  return snapservice
+  return service
 end
 
 --- Start the snap service.
