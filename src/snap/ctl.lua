@@ -12,7 +12,7 @@
 -- You should have received a copy of the GNU Lesser General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-local json = require("json")
+local json = require("cjson")
 local env = require("snap.env")
 
 --- Execute command using operating system shell and capture the output.
@@ -46,7 +46,7 @@ end
 ---@return string[]
 local function unset_args(...)
   local unset = {}
-  for _, key in ipairs(arg) do
+  for _, key in ipairs{...} do
     table.insert(unset, string.format("%s!", key))
   end
   return unset
@@ -124,7 +124,7 @@ end
 ---@return table<string, any>
 function SnapCtl:config_get(...)
   local cmd = { "get", "-d" }
-  for _, key in ipairs(arg) do
+  for _, key in ipairs{...} do
     table.insert(cmd, key)
   end
 

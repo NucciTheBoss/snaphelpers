@@ -56,9 +56,9 @@ end
 ---@return table<string, any>
 function SnapConfig:get_options(...)
   local config = {}
-  for _, k in ipairs(arg) do
-    local c = self.get(k)
-    local target = string.match(k, "[^.]+$") -- If sub-key, get deepest nested key.
+  for _, key in ipairs{...} do
+    local c = self.get(key)
+    local target = string.match(key, "[^.]+$") -- If sub-key, get deepest nested key.
     config[target] = c
   end
   return config
