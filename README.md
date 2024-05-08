@@ -5,29 +5,27 @@
 A [Lua](https://www.lua.org) module for interfacing with the snap subsystem
 from within a [snap](https://snapcraft.io/about). Level up your hooks
 and wrappers by being able to quickly access configuration options and
-application properties without requiring a smörgåsbord of complex
-and difficult to maintain shell scripts!
+application properties without requiring a smörgåsbord of complex shell scripts!
 
 </div>
 
 ## But why?
 
 Why did I make a module for creating snap hooks using the Lua programming
-language when the posix shell hooks already exist, and there's already
+language when the posix shell hooks already exist, and there are pre-existing
 utilities for writing snap hooks in other programming languages such as Python?
 Well, first, I once listened to a lightning talk where I was told to stop
-writing complicated shell scripts - I took that to heart - and second,
-there's a few benefits to using Lua-based snap hooks instead of Python-based hooks:
+writing complicated shell scripts ─ I took that to heart ─ and second,
+there are benefits to using Lua-based snap hooks instead of Python-based hooks:
 
 * Lua is fast, minimalistic, and has a small memory footprint.
 * Lua is easy to embed inside snaps.
 * Lua scripts are easy to test, cover, and debug compared to shell scripts.
-* The Lua interpreter is easy to customise; no need for virtual environments and dark magic to obscure complexity behind venv's. You can modify where Lua looks for packages on your system directly within Lua scripts, before the third-party module is loaded.
+* The Lua interpreter is easy to customise; no need for virtual environments and dark magic to obscure complexity behind virtual environments. You can modify where Lua searchs for modules on your system directly within Lua scripts themselves, before the third-party module is even attempted to be loaded.
 
-This module provides a seemless experience for writing snap hooks and
+This module intends to provide a seemless experience for writing snap hooks and
 application wrappers in Lua, and have feature parity with the
-[snap-helpers](https://github.com/albertodonato/snap-helpers) Python
-package.
+[snap-helpers](https://github.com/albertodonato/snap-helpers) Python package.
 
 ## Usage
 
